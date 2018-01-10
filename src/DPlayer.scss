@@ -144,11 +144,11 @@
         .dplayer-camera-icon {
             display: none !important;
         }
-
-        .dplayer-full-in-icon {
-            position: static !important;
-            display: inline-block !important;
-        }
+        // 不用这个实现了。。。
+        // .dplayer-full-in-icon {
+        //     position: static !important;
+        //     display: inline-block !important;
+        // }
 
         .dplayer-controller .dplayer-icons .dplayer-comment .dplayer-comment-box .dplayer-comment-input {
             width: 200px;
@@ -837,7 +837,6 @@
                         height: 180px;
                         text-align: center;
                     }
-
                     &.dplayer-setting-box-speed {
                         .dplayer-setting-origin-panel {
                             display: none;
@@ -858,6 +857,9 @@
 
                     &:hover {
                         background-color: rgba(255,255,255,.1);
+                    }
+                    &.select {
+                        background-color: rgba(255,255,255,.2);
                     }
                 }
 
@@ -936,18 +938,18 @@
                 height: 100%;
                 position: relative;
 
-                &:hover {
-                    .dplayer-full-in-icon {
-                        display: block;
-                    }
-                }
+                // &:hover {
+                //     .dplayer-full-in-icon {
+                //         display: block;
+                //     }
+                // }
 
-                .dplayer-full-in-icon {
-                    position: absolute;
-                    top: -30px;
-                    z-index: 1;
-                    display: none;
-                }
+                // .dplayer-full-in-icon {
+                //     position: absolute;
+                //     top: -30px;
+                //     z-index: 1;
+                //     display: none;
+                // }
             }
 
             .dplayer-quality {
@@ -956,14 +958,14 @@
                 height: 100%;
                 z-index: 2;
 
-                &:hover {
-                    .dplayer-quality-list {
-                        display: block;
-                    }
-                    .dplayer-quality-mask {
-                        display: block;
-                    }
-                }
+                // &:hover {
+                //     .dplayer-quality-list {
+                //         display: block;
+                //     }
+                //     .dplayer-quality-mask {
+                //         display: block;
+                //     }
+                // }
 
                 .dplayer-quality-mask {
                     display: none;
@@ -972,10 +974,13 @@
                     left: -18px;
                     width: 80px;
                     padding-bottom: 12px;
+                    &.dplayer-quality-mask-show{
+                        display: block;
+                    }
                 }
 
                 .dplayer-quality-list {
-                    display: none;
+                    // display: none;
                     font-size: 12px;
                     width: 80px;
                     border-radius: 2px;

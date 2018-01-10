@@ -688,11 +688,13 @@ class DPlayer {
         else {
             this.qualityIndex = index;
         }
+        this.time.disable(); // 进入 loading 状态，首先停止以前的监听
+        this.container.classList.add('dplayer-loading');
         this.switchingQuality = true;
         this.quality = this.options.video.quality[index];
         this.template.qualityButton.innerHTML = this.quality.name;
 
-        const paused = this.video.paused;
+        // const paused = this.video.paused; // 获取上一个视频的播放状态
         this.video.pause();
         const videoHTML = this.template.tplVideo(false, null, this.options.screenshot, 'auto', this.quality.url, this.options.subtitle);
         const videoEle = new DOMParser().parseFromString(videoHTML, 'text/html').body.firstChild;
@@ -705,6 +707,7 @@ class DPlayer {
         this.events.trigger('quality_start', this.quality);
 
         this.on('canplay', () => {
+            this.controller.toggle(); // 移除控制条
             if (this.prevVideo) {
                 if (this.video.currentTime !== this.prevVideo.currentTime) {
                     this.seek(this.prevVideo.currentTime);
@@ -712,9 +715,11 @@ class DPlayer {
                 }
                 this.template.videoWrap.removeChild(this.prevVideo);
                 this.video.classList.add('dplayer-video-current');
-                if (!paused) {
-                    this.video.play();
-                }
+                this.time.enable(); // 添加监听 loading 状态
+                this.container.classList.remove('dplayer-loading');
+                // if (!paused) {
+                this.video.play();
+                // }
                 this.prevVideo = null;
                 this.notice(`${this.tran('Switched to')} ${this.quality.name} ${this.tran('quality')}`);
                 this.switchingQuality = false;

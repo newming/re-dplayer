@@ -6,6 +6,7 @@ class Template {
         this.tran = options.tran;
         this.icons = options.icons;
         this.init();
+        // console.log(this.options);
     }
 
     init () {
@@ -58,11 +59,12 @@ class Template {
         this.browserFullButton = this.container.querySelector('.dplayer-full-icon');
         this.webFullButton = this.container.querySelector('.dplayer-full-in-icon');
         this.menu = this.container.querySelector('.dplayer-menu');
-        this.qualityList = this.container.querySelector('.dplayer-quality-list');
         this.camareButton = this.container.querySelector('.dplayer-camera-icon');
         this.subtitleButton = this.container.querySelector('.dplayer-subtitle-icon');
         this.subtitleButtonInner = this.container.querySelector('.dplayer-subtitle-icon .dplayer-icon-content');
         this.subtitle = this.container.querySelector('.dplayer-subtitle');
+        this.qualityMask = this.container.querySelector('.dplayer-quality-mask');
+        this.qualityList = this.container.querySelector('.dplayer-quality-list');
         this.qualityButton = this.container.querySelector('.dplayer-quality-icon');
         this.barPreview = this.container.querySelector('.dplayer-bar-preview');
         this.barWrap = this.container.querySelector('.dplayer-bar-wrap');
@@ -266,32 +268,15 @@ class Template {
                             </div>
                         </div>
                         <div class="dplayer-setting-speed-panel">
-                            <div class="dplayer-setting-speed-item" data-speed="0.5">
-                                <span class="dplayer-label">0.5</span>
-                            </div>
-                            <div class="dplayer-setting-speed-item" data-speed="0.75">
-                                <span class="dplayer-label">0.75</span>
-                            </div>
-                            <div class="dplayer-setting-speed-item" data-speed="1">
-                                <span class="dplayer-label">${tran('Normal')}</span>
-                            </div>
-                            <div class="dplayer-setting-speed-item" data-speed="1.25">
-                                <span class="dplayer-label">1.25</span>
-                            </div>
-                            <div class="dplayer-setting-speed-item" data-speed="1.5">
-                                <span class="dplayer-label">1.5</span>
-                            </div>
-                            <div class="dplayer-setting-speed-item" data-speed="2">
-                                <span class="dplayer-label">2</span>
-                            </div>
+                            ${this.tplSpeedList(options.speedList, options.speed)}
                         </div>
                     </div>
                 </div>
                 <div class="dplayer-full">
-                    <button class="dplayer-icon dplayer-full-in-icon" data-balloon="${tran('Web full screen')}" data-balloon-pos="up">
+                    <button ${options.webFull ? '' : 'style="display: none;"'} class="dplayer-icon dplayer-full-in-icon" data-balloon="${tran('Web full screen')}" data-balloon-pos="up">
                         <span class="dplayer-icon-content">${icons.get('full-in')}</span>
                     </button>
-                    <button class="dplayer-icon dplayer-full-icon" data-balloon="${tran('Full screen')}" data-balloon-pos="up">
+                    <button ${options.browserFull ? '' : 'style="display: none;"'} class="dplayer-icon dplayer-full-icon" data-balloon="${tran('Full screen')}" data-balloon-pos="up">
                         <span class="dplayer-icon-content">${icons.get('full')}</span>
                     </button>
                 </div>
@@ -347,6 +332,18 @@ class Template {
         <video class="dplayer-video ${current ? `dplayer-video-current"` : ``}" ${pic ? `poster="${pic}"` : ``} webkit-playsinline playsinline ${screenshot || enableSubtitle ? `crossorigin="anonymous"` : ``} ${preload ? `preload="${preload}"` : ``} src="${url}">
             ${enableSubtitle ? `<track kind="metadata" default src="${subtitle.url}"></track>` : ``}
         </video>`;
+    }
+
+    tplSpeedList (speedList, speed) {
+        let result = '';
+        for (let i = 0; i < speedList.length; i++) {
+            const nowSpeed = speedList[i];
+            result += `
+            <div class="dplayer-setting-speed-item ${nowSpeed === speed ? 'select' : ''}" data-speed="${nowSpeed}">
+                <span class="dplayer-label">${nowSpeed === 1 ? this.tran('Normal') : nowSpeed}</span>
+            </div>`;
+        }
+        return result;
     }
 }
 

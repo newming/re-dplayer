@@ -16,7 +16,7 @@
 <body class="markdown-body">
     <h2 id="quick-start">Quick Start</h2>
     <div class="example">
-        <div id="dplayer1" style='height: 372px;'></div>
+        <div id="dplayer1"></div>
         <script>
             var dp1 = new DPlayer({
                 container: document.getElementById('dplayer1'),
@@ -41,7 +41,9 @@
                     defaultQuality: 0,
                     pic: 'https://static001-test.geekbang.org/resource/image/32/f0/32809f551ae31c7f5b376e6104324af0.jpg',
                     type: 'normal'
-                }
+                },
+                webFull: false,
+                browserFull: true
             });
             dp1.on('continuous_change', type => {
                 console.log(type)

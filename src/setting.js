@@ -84,6 +84,7 @@ class SettingBox {
         for (let i = 0; i < this.player.template.speedItem.length; i++) {
             this.player.template.speedItem[i].addEventListener('click', () => {
                 this.player.video.playbackRate = this.player.template.speedItem[i].dataset.speed;
+                this.setSpeedSelect(i);
                 this.hide();
             });
         }
@@ -123,6 +124,15 @@ class SettingBox {
                 this.player.template.danmakuOpacityBox.classList.add('dplayer-setting-danmaku-active');
             });
         }
+
+        // quality switch
+        this.player.template.qualityButton.addEventListener('click', () => {
+            if (this.player.template.qualityMask.classList.contains('dplayer-quality-mask-show')) {
+                this.player.template.qualityMask.classList.remove('dplayer-quality-mask-show');
+            } else {
+                this.player.template.qualityMask.classList.add('dplayer-quality-mask-show');
+            }
+        });
     }
 
     hide () {
@@ -132,7 +142,9 @@ class SettingBox {
             this.player.template.settingBox.classList.remove('dplayer-setting-box-narrow');
             this.player.template.settingBox.classList.remove('dplayer-setting-box-speed');
         }, 300);
-
+        if (this.player.template.qualityMask.classList.contains('dplayer-quality-mask-show')) {
+            this.player.template.qualityMask.classList.remove('dplayer-quality-mask-show');
+        }
         this.player.controller.disableAutoHide = false;
     }
 
@@ -141,6 +153,16 @@ class SettingBox {
         this.player.template.mask.classList.add('dplayer-mask-show');
 
         this.player.controller.disableAutoHide = true;
+    }
+    // 设置选中 speed 样式
+    setSpeedSelect (index) {
+        for (let i = 0, len = this.player.template.speedItem.length; i < len; i++) {
+            if (i === index) {
+                this.player.template.speedItem[i].classList.add('select');
+            } else {
+                this.player.template.speedItem[i].classList.remove('select');
+            }
+        }
     }
 }
 
