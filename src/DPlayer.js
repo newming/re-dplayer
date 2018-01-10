@@ -707,7 +707,7 @@ class DPlayer {
         this.events.trigger('quality_start', this.quality);
 
         this.on('canplay', () => {
-            this.controller.toggle(); // 移除控制条
+            this.setting.hide(); // 移除 setting 控制条
             if (this.prevVideo) {
                 if (this.video.currentTime !== this.prevVideo.currentTime) {
                     this.seek(this.prevVideo.currentTime);

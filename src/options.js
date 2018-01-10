@@ -92,7 +92,7 @@ module.exports = (options) => {
         contextmenu: [],
         mutex: true,
         continuous: false, // 连续播放开关
-        speedList: [0.5, 0.75, 1, 1.25, 1.5, 2],
+        speedList: [0.5, 1, 1.25, 1.5, 2],
         speed: 1,
         webFull: true, // 网页全屏按钮是否显示
         browserFull: true // 浏览器全屏是否显示
