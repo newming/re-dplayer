@@ -7,7 +7,13 @@ module.exports = {
     * @return {String} 00:00 format
     */
     secondToTime: (second) => {
-        const add0 = (num) => num < 10 ? '0' + num : '' + num;
+        if (isNaN(second)) {
+            return '00:00';
+        }
+        if (second < 0) {
+            second = 0;
+        }
+        const add0 = (num) => num < 0 ? '00' : num < 10 ? '0' + num : '' + num;
         const min = parseInt(second / 60);
         const sec = parseInt(second - min * 60);
         return add0(min) + ':' + add0(sec);
