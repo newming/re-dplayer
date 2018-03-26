@@ -11,6 +11,7 @@
     <script src="https://unpkg.com/hls.js/dist/hls.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/dashjs/dist/dash.all.min.js"></script>
     <script src="DPlayer.js"></script>
+    <!-- <script src="DPlayer.min.js"></script> -->
 </head>
 
 <body class="markdown-body">
@@ -42,12 +43,13 @@
                     pic: 'https://static001-test.geekbang.org/resource/image/32/f0/32809f551ae31c7f5b376e6104324af0.jpg',
                     type: 'normal'
                 },
-                webFull: false,
+                webFull: true,
                 browserFull: true
             });
             dp1.on('continuous_change', type => {
                 console.log(type)
             })
+            dp1.seek(100)
         </script>
     </div>
     <!-- <h2 id="options">Options</h2> -->

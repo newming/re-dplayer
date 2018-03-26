@@ -130,6 +130,7 @@ class SettingBox {
             if (this.player.template.qualityMask.classList.contains('dplayer-quality-mask-show')) {
                 this.player.template.qualityMask.classList.remove('dplayer-quality-mask-show');
             } else {
+                this.player.template.settingBox.classList.remove('dplayer-setting-box-open'); // 将设置的box关闭
                 this.player.template.qualityMask.classList.add('dplayer-quality-mask-show');
             }
         });
@@ -149,6 +150,7 @@ class SettingBox {
     }
 
     show () {
+        this.player.template.qualityMask.classList.remove('dplayer-quality-mask-show'); // 将画质切换关闭
         this.player.template.settingBox.classList.add('dplayer-setting-box-open');
         this.player.template.mask.classList.add('dplayer-mask-show');
 

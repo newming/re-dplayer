@@ -7,7 +7,7 @@ module.exports = {
     * @return {String} 00:00 format
     */
     secondToTime: (second) => {
-        if (isNaN(second)) {
+        if (!second || isNaN(second) || second === Infinity) {
             return '00:00';
         }
         if (second < 0) {
